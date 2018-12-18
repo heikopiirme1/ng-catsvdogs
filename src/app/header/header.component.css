@@ -1,0 +1,17 @@
+#header {
+    border-bottom: 1px solid black;
+    font-style: italic;
+    color: #FFF;
+    background-color: rgb(36, 36, 36);
+    text-align: center;
+    padding: 15px;
+}
+
+#title {
+    font-weight: 200;
+    margin: 0;
+}
+
+#vs {
+    font-weight: 600;
+}
