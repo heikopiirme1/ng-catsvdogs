@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VotingService } from '../voting.service';
 
 @Component({
   selector: 'app-main',
@@ -6,20 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  response: any;
 
   dogVotes= 10;
   catVotes= 10;
 
-  constructor() { }
+  constructor(private votingService: VotingService) { }
 
   ngOnInit() {
   }
 
   voteCats() {
-    this.catVotes++;
+    this.votingService.voteForCats()
+      .subscribe(data => this.response = data);
   }
 
   voteDogs() {
-    this.dogVotes++;
+    this.votingService.voteForDogs()
+      .subscribe(data => this.response = data);
   }
 }
