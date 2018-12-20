@@ -20,22 +20,40 @@ body {
 
 #catsBtn {
     background-color: #fff;
-    color: #FFA1B5;
-    border: 1px solid #FFA1B5;
+    color: #ee5253;
+    border: 1px solid #ee5253;
 }
 
 #catsBtn:hover {
     color: #FFF;
-    background-color: #FFA1B5;
+    background-color: #ee5253;
 }
 
 #dogsBtn {
     background-color: #fff;
-    color: #86C7F3;
-    border: 1px solid #86C7F3;
+    color: #10ac84;
+    border: 1px solid #10ac84;
 }
 
 #dogsBtn:hover {
     color: #FFF;
-    background-color: #86C7F3;
+    background-color: #10ac84;
+}
+
+#results {
+    text-align: center;
+}
+
+.resultsText {
+    font-size: 6em;
+    font-weight: 200;
+    color: #576574;
+}
+
+#catVotes {
+    color: #ee5253;
+}
+
+#dogVotes {
+    color: #10ac84;
 }
