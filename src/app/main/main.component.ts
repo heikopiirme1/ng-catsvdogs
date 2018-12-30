@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VotingService } from '../voting.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-main',
@@ -7,40 +8,40 @@ import { VotingService } from '../voting.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  response: any;
+response: any;
+catVotes: Number;
+dogVotes: Number;
 
-  catVotes: any;
-  dogVotes: any;
-
-  constructor(private votingService: VotingService) { }
+  constructor(private votingService: VotingService, private socket: Socket) { }
 
   ngOnInit() {
-    this.getResults();
+
+    this.socket.on('users connected', (socketCount) => {
+      console.log("Kasutajaid lehel:" + socketCount);
+    })
+
+    this.socket.on('catvotes', (catData) => {
+      console.log("Kassidel hääli: " + catData);
+      this.catVotes = catData;
+    });
+
+    this.socket.on('dogvotes', (dogData) => {
+      console.log("Koertel hääli: " + dogData);
+      this.dogVotes = dogData;
+    });
+    
   }
 
   voteCats() {
     this.votingService.voteForCats()
       .subscribe(data => this.response = data);
-
-    setInterval(a=>{
-      this.getResults();
-    },300,[]);
+    this.socket.emit('cat vote');
   }
 
   voteDogs() {
     this.votingService.voteForDogs()
       .subscribe(data => this.response = data);
-
-    setInterval(a=>{
-      this.getResults();
-    },300,[]);
-  }
-
-  getResults(){
-    this.votingService.getDogResults()  
-      .subscribe(data => this.dogVotes = data);
-    this.votingService.getCatResults()  
-      .subscribe(data => this.catVotes = data);
+    this.socket.emit('dog vote');
   }
 
 }
